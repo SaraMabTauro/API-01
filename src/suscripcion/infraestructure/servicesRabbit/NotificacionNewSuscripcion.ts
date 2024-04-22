@@ -18,7 +18,7 @@ export class NotificationNewSuscripcion implements INotificationNewSuscripcion{
             
         };
         this.url = 'amqp://guest:guest@107.23.187.32';
-        this.exch = 'upChiapas';
+        this.exch = 'Prueba';
         //Options solo para cloudamqp
        // this.server = process.env.AMQP_SERVER;
       }
@@ -28,6 +28,7 @@ export class NotificationNewSuscripcion implements INotificationNewSuscripcion{
           const ch =await conn.createChannel();
           
           const status = ch.publish(this.exch,"", Buffer.from(JSON.stringify(subs)))
+          console.log(subs);
          
           return status;
           } catch (error) {
