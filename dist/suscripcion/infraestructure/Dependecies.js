@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createSuscripcionController = exports.createSuscripcionUseCase = exports.serviceNotificationUseCase = exports.servicesNotification = exports.mysqlSuscripcionRepository = void 0;
+const CreateSuscriptionUseCase_1 = require("../aplicacion/methodsSuscription/CreateSuscriptionUseCase");
+const CreateSuscipcionController_1 = require("./controllers/CreateSuscipcionController");
+const NotificacionNewSuscripcion_1 = require("../aplicacion/services/NotificacionNewSuscripcion");
+const NotificacionNewSuscripcion_2 = require("./servicesRabbit/NotificacionNewSuscripcion");
+const MysqlSuscripcionRepository_1 = require("./repository//MysqlSuscripcionRepository");
+exports.mysqlSuscripcionRepository = new MysqlSuscripcionRepository_1.MysqlSuscripcionRepository();
+exports.servicesNotification = new NotificacionNewSuscripcion_2.NotificationNewSuscripcion();
+exports.serviceNotificationUseCase = new NotificacionNewSuscripcion_1.NotificacionSuscripcionUseCase(exports.servicesNotification);
+exports.createSuscripcionUseCase = new CreateSuscriptionUseCase_1.CreateSuscripcionUseCase(exports.mysqlSuscripcionRepository, exports.serviceNotificationUseCase);
+exports.createSuscripcionController = new CreateSuscipcionController_1.CreateSuscripcionController(exports.createSuscripcionUseCase);
